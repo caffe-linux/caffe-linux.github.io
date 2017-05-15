@@ -251,6 +251,118 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://espressos.cn/2017/05/14/log-bin-trust-function-reators变量解释/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bass">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yw">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/14/log-bin-trust-function-reators变量解释/" itemprop="url">log_bin_trust_function_reators变量解释</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-15T02:33:58+08:00">
+                2017-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在MySQL主从复制机器的master的数据库中创建function,报出如下错误:<br>Error Code: 1418. This function has none of DETERMINISTIC, NO SQL, or READS SQL DATA in its declaration and binary logging is enabled (you <em>might</em> want to use the less safe log_bin_trust_function_creators variable)<br>原来是类为在主从复制的两台MySQL服务器中开启了二进制日志选项log-bin,slave会从master复制数据,而一些操做,比如function所得到的结果在master和slave可能不同,所以存在潜在的安全隐患.因此默认情况下会阻止function的创建.<br>解决方法:<br>1.将log_bin_trust_function_creators参数设置为ON,这样一来开启了log-bin的MySQL Server便可以随意创建function.这里存在潜在的数据安全问题,除非明确的知道创建的function在master和slave上的行为完全一致.<br>mysql&gt; set global log_bin_trust_function_creators=1;<br>mysql&gt; show variables like ‘log_bin_trust_function_creators’;<br>+———————————+——-+<br>| Variable_name                   | Value |<br>+———————————+——-+<br>| log_bin_trust_function_creators | ON    |<br>+———————————+——-+<br>1 row in set (0.00 sec)<br>另外如果在master上创建函数,想通过主从复制的方式复制到slave上则也需要开启log-bin的salave中设置上述变量的值为on(注意:变量的设置不会从master复制到slave上),否则主从复制会报错.<br>2.明确指明函数的类型<br>1 DETERMINISTIC 不确定的<br>2 NO SQL 没有SQl语句，当然也不会修改数据<br>3 READS SQL DATA 只是读取数据，当然也不会修改数据<br>　　比如：CREATE DEFINER=<code>username</code>@<code>%</code> READS SQL DATA FUNCTION <code>fn_getitemclock</code>(i_itemid bigint,i_clock int,i_pos int) RETURNS int(11)…<br>这样一来相当于明确的告知MySQL服务器这个函数不会修改数据，因此可以在开启了log-bin的服务器上安全的创建并被复制到开启了log-bin的slave上。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://espressos.cn/2017/05/14/mysql报错错误代码：1419/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -735,7 +847,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
