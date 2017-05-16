@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="ZooKeeper," />
 
 
 
@@ -90,16 +90,17 @@
 
 
 
-<meta name="description" content="我的名了:陈林">
+<meta name="description" content="node-zk-browser是zookeeper web管理工具,使用Node.js,基于express.js和node-zookeeper开发,以树的形式展示zookeeper的数据,登录后可以对节点数据进行新增,编辑,删除.案装配置流程如下:1.安装node.jswget https://github.com/joyent/node/archive/v0.10.35.tar.gz[root@">
+<meta name="keywords" content="ZooKeeper">
 <meta property="og:type" content="article">
-<meta property="og:title" content="document">
-<meta property="og:url" content="http://espressos.cn/2017/05/13/document/index.html">
+<meta property="og:title" content="ZooKeeper web管理安装node-zk-brower">
+<meta property="og:url" content="http://espressos.cn/2017/05/15/ZooKeeper-web管理安装node-zk-brower/index.html">
 <meta property="og:site_name" content="yw">
-<meta property="og:description" content="我的名了:陈林">
-<meta property="og:updated_time" content="2017-05-14T05:08:40.746Z">
+<meta property="og:description" content="node-zk-browser是zookeeper web管理工具,使用Node.js,基于express.js和node-zookeeper开发,以树的形式展示zookeeper的数据,登录后可以对节点数据进行新增,编辑,删除.案装配置流程如下:1.安装node.jswget https://github.com/joyent/node/archive/v0.10.35.tar.gz[root@">
+<meta property="og:updated_time" content="2017-05-16T05:52:08.660Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="document">
-<meta name="twitter:description" content="我的名了:陈林">
+<meta name="twitter:title" content="ZooKeeper web管理安装node-zk-brower">
+<meta name="twitter:description" content="node-zk-browser是zookeeper web管理工具,使用Node.js,基于express.js和node-zookeeper开发,以树的形式展示zookeeper的数据,登录后可以对节点数据进行新增,编辑,删除.案装配置流程如下:1.安装node.jswget https://github.com/joyent/node/archive/v0.10.35.tar.gz[root@">
 
 
 
@@ -127,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://espressos.cn/2017/05/13/document/"/>
+  <link rel="canonical" href="http://espressos.cn/2017/05/15/ZooKeeper-web管理安装node-zk-brower/"/>
 
 
 
 
 
-  <title>document | yw</title>
+  <title>ZooKeeper web管理安装node-zk-brower | yw</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zk-CN">
@@ -253,7 +254,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://espressos.cn/2017/05/13/document/">
+    <link itemprop="mainEntityOfPage" href="http://espressos.cn/2017/05/15/ZooKeeper-web管理安装node-zk-brower/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="bass">
@@ -270,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">document</h1>
+          <h1 class="post-title" itemprop="name headline">ZooKeeper web管理安装node-zk-brower</h1>
         
 
         <div class="post-meta">
@@ -282,8 +283,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-14T01:08:14+08:00">
-                2017-05-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-15T22:03:33+08:00">
+                2017-05-15
               </time>
             
 
@@ -317,7 +318,8 @@
       
 
       
-        <p>我的名了:陈林</p>
+        <p>node-zk-browser是zookeeper web管理工具,使用Node.js,基于express.js和node-zookeeper开发,以树的形式展示zookeeper的数据,登录后可以对节点数据进行新增,编辑,删除.<br>案装配置流程如下:<br>1.安装node.js<br>wget <a href="https://github.com/joyent/node/archive/v0.10.35.tar.gz" target="_blank" rel="external">https://github.com/joyent/node/archive/v0.10.35.tar.gz</a><br>[root@DB zookeeper-web安装包]# wget <a href="https://github.com/joyent/node/archive/v0.10.35.tar.gz" target="_blank" rel="external">https://github.com/joyent/node/archive/v0.10.35.tar.gz</a><br>[root@DB zookeeper-web安装包]# ls<br>v0.10.35.tar.gz<br>安装:<br>[root@DB zookeeper-web安装包]# wget <a href="https://github.com/joyent/node/archive/v0.10.35.tar.gz" target="_blank" rel="external">https://github.com/joyent/node/archive/v0.10.35.tar.gz</a><br>[root@DB zookeeper-web安装包]# ls<br>v0.10.35.tar.gz<br>安装:注意需要gcc-c++支持,若提示相应错误,需安装yum -y install gcc-c++<br>[root@DB zookeeper-web安装包]# tar -xzvf v0.10.35.tar.gz<br>[root@DB node-v0.x-archive-0.10.35]# ./configure –prefix=/data/apps/nodejs<br>[root@DB node-v0.x-archive-0.10.35]# make &amp;&amp; make install<br>[root@DB zookeeper-web安装包]# tar -xzvf v0.10.35.tar.gz<br>[root@DB node-v0.x-archive-0.10.35]# ./configure –prefix=/data/apps/nodesj<br>[root@DB node-v0.x-archive-0.10.35]# make &amp;&amp; make install<br>配置环境变量:~/.bash_profile<br>export PATH=$PATH:/data/apps/nodejs/bin<br>export NODE_PATH=/data/apps/nodejs:/data/apps/nodejs/lib/node_modules<br>这个版本的nodesjs是自带npm<br>运行下面的脚本hi_cl.js<br>[root@DB ~]# cat hi_cl.js<br>var http = require(“http”);<br>http.createServer(function(request, response) {<br>    response.writeHead(200,{“Content-Type”:”text/plain”});<br>    response.write(“wo shi cl”);<br>    response.end();<br>    }).listen(5000);<br>注意防火墙！<br>[root@DB ~]# node hi_cl.js<br>查看效果!<br>[root@ok caffe-linux]# curl <a href="http://10.100.0.220:5000" target="_blank" rel="external">http://10.100.0.220:5000</a><br>wo shi cl<br>安装信赖包:<br><a href="https://github.com/killme2008/node-zk-browser" target="_blank" rel="external">https://github.com/killme2008/node-zk-browser</a><br>[root@DB zookeeper-web安装包]# ls<br>node-v0.x-archive-0.10.35  node-zk-browser-master.zip  v0.10.35.tar.gz<br>[root@DB zookeeper-web安装包]# unzip node-zk-browser-master.zip<br>[root@DB zookeeper-web安装包]# ls<br>node-v0.x-archive-0.10.35  node-zk-browser-master  node-zk-browser-master.zip  v0.10.35.tar.gz<br>[root@DB zookeeper-web安装包]# mv node-zk-browser-master /data/apps/<br>[root@DB apps]# cd node-zk-browser-master<br>[root@DB node-zk-browser-master]# ls<br>app.js  LICENSE.txt  logs  package.json  public  README.md  start.sh  test  user.json  views  zk.js<br>进入node-zk-brower-master目录(重点注意一定要进入这个目录下)执行下列命令来安装信赖包(ejs,express,express-namespace和zookeeper)<br>如下列:<br>npm install -d ejs<br>[root@DB node-zk-browser-master]# npm install -d ejs<br>npm info it worked if it ends with ok<br>npm info using npm@1.4.28<br>npm info using node@v0.10.35<br>npm WARN package.json node-zk-browser@0.0.2 No repository field.<br>npm info trying registry request attempt 1 at 13:21:55<br>npm http GET <a href="https://registry.npmjs.org/ejs" target="_blank" rel="external">https://registry.npmjs.org/ejs</a><br>npm http 200 <a href="https://registry.npmjs.org/ejs" target="_blank" rel="external">https://registry.npmjs.org/ejs</a><br>npm info install ejs@2.5.6 into /data/apps/node-zk-browser-master<br>npm info installOne ejs@2.5.6<br>npm info preinstall ejs@2.5.6<br>npm info build /data/apps/node-zk-browser-master/node_modules/ejs<br>npm info linkStuff ejs@2.5.6<br>npm info install ejs@2.5.6<br>npm info postinstall ejs@2.5.6<br>ejs@2.5.6 node_modules/ejs<br>npm info ok<br>同上安装下面包:<br>npm install -d express<br>npm install -d express-namespace<br>npm install -d zookeeper<br>注意!!!!!!<br>安装完成后会在node-zk-browser下生成ejs,express,express-namespace,zookeeper<br>[root@DB node-zk-browser-master]# ls node_modules/<br>ejs  express  express-namespace  zookeeper<br>配置node-zk-browser-master<br>修改启动脚本配置zk地址:start.sh<br>[root@DB node-zk-browser-master]# cat start.sh<br>LOGFILE=$(dirname $0)/logs/node-zk-browser.log<br>export ZK_HOST=”10.100.0.220:2181,182.92.189.44:2181,182.91.22.35:2181”<br>nohup node $(dirname $0)/app.js 2&gt;&amp;1 &gt;&gt;$LOGFILE &amp;</p>
+<p>启动服务:<br>[root@DB node-zk-browser-master]# ./start.sh &amp;<br>[root@DB node-zk-browser-master]# lsof -i:3000<br>COMMAND   PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME<br>node    27494 root   11u  IPv4  39832      0t0  TCP *:hbci (LISTEN)<br>node    27494 root   12u  IPv4  39833      0t0  TCP 10.100.0.220:hbci-&gt;ok:58510 (ESTABLISHED)<br>node    27494 root   13u  IPv4  39835      0t0  TCP 10.100.0.220:hbci-&gt;ok:58516 (ESTABLISHED)<br>node    27494 root   14u  IPv4  39836      0t0  TCP 10.100.0.220:hbci-&gt;ok:58518 (ESTABLISHED)<br>node    27494 root   15u  IPv4  39838      0t0  TCP 10.100.0.220:hbci-&gt;ok:58520 (ESTABLISHED)<br>查看效果:<br>在浏览器中查看效果：<br><a href="http://10.100.0.220:3000" target="_blank" rel="external">http://10.100.0.220:3000</a></p>
 
       
     </div>
@@ -345,6 +347,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/ZooKeeper/" rel="tag"># ZooKeeper</a>
+          
+        </div>
+      
 
       
         
@@ -354,15 +362,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/05/14/log-bin-trust-function-reators变量解释/" rel="next" title="log_bin_trust_function_reators变量解释">
+                <i class="fa fa-chevron-left"></i> log_bin_trust_function_reators变量解释
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/14/hexo搭建github博客/" rel="prev" title="Next主题安装与配置">
-                Next主题安装与配置 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
