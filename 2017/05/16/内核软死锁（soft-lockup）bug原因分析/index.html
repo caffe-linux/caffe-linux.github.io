@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="kernel," />
 
 
 
@@ -90,12 +90,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="yw">
-<meta property="og:url" content="http://espressos.cn/tags/git/index.html">
+<meta name="description" content="在shell桌面有以下内容输出:Message from syslogd@localhost at May 17 14:12:17 … kernel:BUG: soft lockup - CPU#1 stuck for 67s! [AliYunDun:32316] Soft lockup名称解释：所谓，soft lockup就是说，这个bug没有让系统彻底死机，但是若干个进程（或者kernel t">
+<meta name="keywords" content="kernel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内核软死锁（soft lockup）bug原因分析">
+<meta property="og:url" content="http://espressos.cn/2017/05/16/内核软死锁（soft-lockup）bug原因分析/index.html">
 <meta property="og:site_name" content="yw">
+<meta property="og:description" content="在shell桌面有以下内容输出:Message from syslogd@localhost at May 17 14:12:17 … kernel:BUG: soft lockup - CPU#1 stuck for 67s! [AliYunDun:32316] Soft lockup名称解释：所谓，soft lockup就是说，这个bug没有让系统彻底死机，但是若干个进程（或者kernel t">
+<meta property="og:updated_time" content="2017-05-17T06:21:40.195Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yw">
+<meta name="twitter:title" content="内核软死锁（soft lockup）bug原因分析">
+<meta name="twitter:description" content="在shell桌面有以下内容输出:Message from syslogd@localhost at May 17 14:12:17 … kernel:BUG: soft lockup - CPU#1 stuck for 67s! [AliYunDun:32316] Soft lockup名称解释：所谓，soft lockup就是说，这个bug没有让系统彻底死机，但是若干个进程（或者kernel t">
 
 
 
@@ -123,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://espressos.cn/tags/git/"/>
+  <link rel="canonical" href="http://espressos.cn/2017/05/16/内核软死锁（soft-lockup）bug原因分析/"/>
 
 
 
 
 
-  <title>Tag: git | yw</title>
+  <title>内核软死锁（soft lockup）bug原因分析 | yw</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zk-CN">
@@ -155,7 +160,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -239,44 +244,151 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h1>git<small>Tag</small>
-      </h1>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://espressos.cn/2017/05/16/内核软死锁（soft-lockup）bug原因分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bass">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yw">
+    </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">内核软死锁（soft lockup）bug原因分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-17T02:14:29+08:00">
+                2017-05-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>在shell桌面有以下内容输出:<br>Message from syslogd@localhost at May 17 14:12:17 …<br> kernel:BUG: soft lockup - CPU#1 stuck for 67s! [AliYunDun:32316]</p>
+<p>Soft lockup名称解释：所谓，soft lockup就是说，这个bug没有让系统彻底死机，但是若干个进程（或者kernel thread）被锁死在了某个状态（一般在内核区域），很多情况下这个是由于内核锁的使用的问题。</p>
+<p>linux内核对于每一个cpu都有一个监控进程,这在技术界这个叫做watchdog:</p>
+<h1 id="ps-aux-grep-watchdog"><a href="#ps-aux-grep-watchdog" class="headerlink" title="ps aux|grep watchdog"></a>ps aux|grep watchdog</h1><p>root         6  0.0  0.0      0     0 ?        S    Jan12   0:24 [watchdog/0]<br>root        10  0.0  0.0      0     0 ?        R    Jan12   0:24 [watchdog/1]<br>root        14  0.0  0.0      0     0 ?        S    Jan12   0:22 [watchdog/2]<br>root        18  0.0  0.0      0     0 ?        S    Jan12   0:22 [watchdog/3]<br>root      9476  0.0  0.0 103256   836 pts/5    R+   14:18   0:00 grep watchdog</p>
 
-      <h2 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2017/05/16/git回滚到之前某一commit/" itemprop="url">
-              
-                <span itemprop="name">git回滚到之前某一commit</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-17T00:46:39+08:00"
-              content="2017-05-17" >
-          05-17
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/kernel/" rel="tag"># kernel</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/16/git回滚到之前某一commit/" rel="next" title="git回滚到之前某一commit">
+                <i class="fa fa-chevron-left"></i> git回滚到之前某一commit
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -284,6 +396,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -303,8 +419,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -357,6 +482,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ps-aux-grep-watchdog"><span class="nav-number">1.</span> <span class="nav-text">ps aux|grep watchdog</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -470,6 +611,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
 
   
 
