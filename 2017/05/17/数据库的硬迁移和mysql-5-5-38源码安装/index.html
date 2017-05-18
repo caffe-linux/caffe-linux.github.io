@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="mysql," />
 
 
 
@@ -90,13 +90,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="kernel">
-<meta property="og:url" content="http://espressos.cn/kernel/index.html">
+<meta name="description" content="场景：一台服务器出现了故障,需要把数据库迁移到另一台服务器上,由于数据效大,直接压缩数库的数据目录(在数据库DOWN的情况下)数据库版本mysql 5.5.38安装方式:源码安装思路:在另一台服务器上编译安装相同的数据库,注意在初始化数据库的时候要指定配置文件(注意是要和源数据库的配置文件相同).当初始化完成后,把数据目录用备份好的数据目录替换。这样就完成了一次数据库的硬迁移.源码安装mysql">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库的硬迁移和mysql 5.5.38源码安装">
+<meta property="og:url" content="http://espressos.cn/2017/05/17/数据库的硬迁移和mysql-5-5-38源码安装/index.html">
 <meta property="og:site_name" content="yw">
-<meta property="og:updated_time" content="2017-05-17T06:13:54.918Z">
+<meta property="og:description" content="场景：一台服务器出现了故障,需要把数据库迁移到另一台服务器上,由于数据效大,直接压缩数库的数据目录(在数据库DOWN的情况下)数据库版本mysql 5.5.38安装方式:源码安装思路:在另一台服务器上编译安装相同的数据库,注意在初始化数据库的时候要指定配置文件(注意是要和源数据库的配置文件相同).当初始化完成后,把数据目录用备份好的数据目录替换。这样就完成了一次数据库的硬迁移.源码安装mysql">
+<meta property="og:updated_time" content="2017-05-18T05:55:33.031Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kernel">
+<meta name="twitter:title" content="数据库的硬迁移和mysql 5.5.38源码安装">
+<meta name="twitter:description" content="场景：一台服务器出现了故障,需要把数据库迁移到另一台服务器上,由于数据效大,直接压缩数库的数据目录(在数据库DOWN的情况下)数据库版本mysql 5.5.38安装方式:源码安装思路:在另一台服务器上编译安装相同的数据库,注意在初始化数据库的时候要指定配置文件(注意是要和源数据库的配置文件相同).当初始化完成后,把数据目录用备份好的数据目录替换。这样就完成了一次数据库的硬迁移.源码安装mysql">
 
 
 
@@ -124,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://espressos.cn/kernel/"/>
+  <link rel="canonical" href="http://espressos.cn/2017/05/17/数据库的硬迁移和mysql-5-5-38源码安装/"/>
 
 
 
 
 
-  <title>kernel | yw</title>
+  <title>数据库的硬迁移和mysql 5.5.38源码安装 | yw</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zk-CN">
@@ -156,7 +160,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -241,18 +245,147 @@
             
 
   <div id="posts" class="posts-expand">
-  <header class="post-header">
+    
 
-	<h1 class="post-title" itemprop="name headline">kernel</h1>
+  
 
+  
+  
+  
 
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://espressos.cn/2017/05/17/数据库的硬迁移和mysql-5-5-38源码安装/">
 
-</header>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bass">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yw">
+    </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据库的硬迁移和mysql 5.5.38源码安装</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-18T01:29:46+08:00">
+                2017-05-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
     
+
+    <div class="post-body" itemprop="articleBody">
+
       
-    
+      
+
+      
+        <p>场景：<br>一台服务器出现了故障,需要把数据库迁移到另一台服务器上,由于数据效大,直接压缩数库<br>的数据目录(在数据库DOWN的情况下)<br>数据库版本mysql 5.5.38<br>安装方式:源码安装<br>思路:在另一台服务器上编译安装相同的数据库,注意在初始化数据库的时候要指定配置文件(注意是要和源数据库的配置文件相同).当初始化完成后,把数据目录用备份好的数据目录替换。这样就完成了一次数据库的硬迁移.<br>源码安装mysql 5.5.38<br>mysql 5.5.38官方下载地址：<br><a href="http://dev.mysql.com/get/Downloads/MySQL-5.5/mysql-5.5.38.tar.gz" target="_blank" rel="external">http://dev.mysql.com/get/Downloads/MySQL-5.5/mysql-5.5.38.tar.gz</a><br>df5071c49764c3ad65df04ff20866a86<br>和5.1.x不同5.5.x之后的版本都需要使用cmake安装，所以首先需要安装cmake<br>yum install cmake  #安装cmake<br>这个版本不需要特别处理innodb，5.5.x起，mysql默认存储引擎就是innodb</p>
+<p>解压缩并进入目录:<br>cmake -DCMAKE_INSTALL_PREFIX=/apps/mysql-5.5.38 \<br>-DMYSQL_UNIX_ADDR=/tmp/mysql.sock \<br>-DDEFAULT_CHARSET=utf8 \<br>-DDEFAULT_COLLATION=utf8_general_ci \<br>-DWITH_EXTRA_CHARSETS:STRING=utf8,gbk \<br>-DWITH_MYISAM_STORAGE_ENGINE=1 \<br>-DWITH_INNOBASE_STORAGE_ENGINE=1 \<br>-DWITH_MEMORY_STORAGE_ENGINE=1 \<br>-DWITH_READLINE=1 \<br>-DENABLED_LOCAL_INFILE=1 \<br>-DMYSQL_DATADIR=/data1/mysql \<br>-DMYSQL_TCP_PORT=3306 \<br>-DMYSQL_USER=mysql<br>配置完后,开始编译安装:<br>make &amp;&amp; make install<br>初始化数据库:<br>./scripts/mysql_install_db –defaults-file=/etc/my.cnf –datadir=/data1/mysql –user=mysql<br>回到开始的思路替换datadir目录,启动数据库!</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/16/内核软死锁（soft-lockup）bug原因分析/" rel="next" title="内核软死锁（soft lockup）bug原因分析">
+                <i class="fa fa-chevron-left"></i> 内核软死锁（soft lockup）bug原因分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -451,6 +584,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
 
   
 

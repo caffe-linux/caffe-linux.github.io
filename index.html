@@ -251,6 +251,119 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://espressos.cn/2017/05/17/数据库的硬迁移和mysql-5-5-38源码安装/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bass">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yw">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/17/数据库的硬迁移和mysql-5-5-38源码安装/" itemprop="url">数据库的硬迁移和mysql 5.5.38源码安装</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-18T01:29:46+08:00">
+                2017-05-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>场景：<br>一台服务器出现了故障,需要把数据库迁移到另一台服务器上,由于数据效大,直接压缩数库<br>的数据目录(在数据库DOWN的情况下)<br>数据库版本mysql 5.5.38<br>安装方式:源码安装<br>思路:在另一台服务器上编译安装相同的数据库,注意在初始化数据库的时候要指定配置文件(注意是要和源数据库的配置文件相同).当初始化完成后,把数据目录用备份好的数据目录替换。这样就完成了一次数据库的硬迁移.<br>源码安装mysql 5.5.38<br>mysql 5.5.38官方下载地址：<br><a href="http://dev.mysql.com/get/Downloads/MySQL-5.5/mysql-5.5.38.tar.gz" target="_blank" rel="external">http://dev.mysql.com/get/Downloads/MySQL-5.5/mysql-5.5.38.tar.gz</a><br>df5071c49764c3ad65df04ff20866a86<br>和5.1.x不同5.5.x之后的版本都需要使用cmake安装，所以首先需要安装cmake<br>yum install cmake  #安装cmake<br>这个版本不需要特别处理innodb，5.5.x起，mysql默认存储引擎就是innodb</p>
+<p>解压缩并进入目录:<br>cmake -DCMAKE_INSTALL_PREFIX=/apps/mysql-5.5.38 \<br>-DMYSQL_UNIX_ADDR=/tmp/mysql.sock \<br>-DDEFAULT_CHARSET=utf8 \<br>-DDEFAULT_COLLATION=utf8_general_ci \<br>-DWITH_EXTRA_CHARSETS:STRING=utf8,gbk \<br>-DWITH_MYISAM_STORAGE_ENGINE=1 \<br>-DWITH_INNOBASE_STORAGE_ENGINE=1 \<br>-DWITH_MEMORY_STORAGE_ENGINE=1 \<br>-DWITH_READLINE=1 \<br>-DENABLED_LOCAL_INFILE=1 \<br>-DMYSQL_DATADIR=/data1/mysql \<br>-DMYSQL_TCP_PORT=3306 \<br>-DMYSQL_USER=mysql<br>配置完后,开始编译安装:<br>make &amp;&amp; make install<br>初始化数据库:<br>./scripts/mysql_install_db –defaults-file=/etc/my.cnf –datadir=/data1/mysql –user=mysql<br>回到开始的思路替换datadir目录,启动数据库!</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://espressos.cn/2017/05/16/内核软死锁（soft-lockup）bug原因分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -434,15 +547,15 @@
       
         
           
-            <p>[root@ok gitlab-cheshi]# git clone git@xx.xx5.1xx.x1:yanjing_chenl/IT-DOC.git<br>Cloning into ‘IT-DOC’…<br>remote: Counting objects: 246, done.<br>remote: Compressing objects: 100% (133/133), done.<br>remote: Total 246 (delta 86), reused 238 (delta 84)<br>Receiving objects: 100% (246/246), 48.49 KiB | 0 bytes/s, done.<br>Resolving deltas: 100% (86/86), done.<br>注意要进入项目的目录中才能看到提交记录:<br>[root@ok IT-DOC]# pwd<br>/data/gitlab-cheshi/IT-DOC<br>[root@ok IT-DOC]# git log<br>commit 0601112506e97f4aab834a046785e122e59cedbf<br>Author: 眼镜 <a href="&#x6d;&#97;&#105;&#108;&#116;&#111;&#58;&#120;&#x78;&#64;&#120;&#x78;&#x2e;&#x63;&#111;&#109;">&#120;&#x78;&#64;&#120;&#x78;&#x2e;&#x63;&#111;&#109;</a><br>Date:   Sun Feb 19 17:18:30 2017 +0800</p>
+            <p>[root@ok gitlab-cheshi]# git clone git@xx.xx5.1xx.x1:yanjing_chenl/IT-DOC.git<br>Cloning into ‘IT-DOC’…<br>remote: Counting objects: 246, done.<br>remote: Compressing objects: 100% (133/133), done.<br>remote: Total 246 (delta 86), reused 238 (delta 84)<br>Receiving objects: 100% (246/246), 48.49 KiB | 0 bytes/s, done.<br>Resolving deltas: 100% (86/86), done.<br>注意要进入项目的目录中才能看到提交记录:<br>[root@ok IT-DOC]# pwd<br>/data/gitlab-cheshi/IT-DOC<br>[root@ok IT-DOC]# git log<br>commit 0601112506e97f4aab834a046785e122e59cedbf<br>Author: 眼镜 <a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#120;&#120;&#x40;&#120;&#x78;&#x2e;&#99;&#x6f;&#109;">&#120;&#120;&#x40;&#120;&#x78;&#x2e;&#99;&#x6f;&#109;</a><br>Date:   Sun Feb 19 17:18:30 2017 +0800</p>
 <pre><code>清理没必要的文档
-</code></pre><p>commit 888558790b9a55ec156d5b62375120f1c1d5d3f2<br>Author: 眼镜 <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#x6f;&#x3a;&#x78;&#x78;&#64;&#120;&#x78;&#46;&#99;&#x6f;&#x6d;">&#x78;&#x78;&#64;&#120;&#x78;&#46;&#99;&#x6f;&#x6d;</a><br>Date:   Sat Feb 18 07:23:50 2017 +0800</p>
+</code></pre><p>commit 888558790b9a55ec156d5b62375120f1c1d5d3f2<br>Author: 眼镜 <a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#x3a;&#120;&#x78;&#x40;&#x78;&#x78;&#x2e;&#99;&#111;&#x6d;">&#120;&#x78;&#x40;&#x78;&#x78;&#x2e;&#99;&#111;&#x6d;</a><br>Date:   Sat Feb 18 07:23:50 2017 +0800</p>
 <pre><code>增加LB75haproxy的置值文件
-</code></pre><p>commit 87b94fcfd5a4a15be1465e838a9ffda248f52933<br>Author: 眼镜 <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#111;&#58;&#x78;&#x78;&#x40;&#120;&#x78;&#46;&#99;&#111;&#109;">&#x78;&#x78;&#x40;&#120;&#x78;&#46;&#99;&#111;&#109;</a><br>Date:   Sat Feb 18 07:17:04 2017 +0800</p>
+</code></pre><p>commit 87b94fcfd5a4a15be1465e838a9ffda248f52933<br>Author: 眼镜 <a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#111;&#x3a;&#x78;&#120;&#x40;&#x78;&#x78;&#x2e;&#x63;&#111;&#x6d;">&#x78;&#120;&#x40;&#x78;&#x78;&#x2e;&#x63;&#111;&#x6d;</a><br>Date:   Sat Feb 18 07:17:04 2017 +0800</p>
 <pre><code>增加LB-55NGINX配置文件
-</code></pre><p>commit 96624c91f55dbf99a17eacfa71bc367ad7a2de71<br>Author: 眼镜 <a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#120;&#x78;&#x40;&#x78;&#x78;&#46;&#x63;&#111;&#x6d;">&#120;&#x78;&#x40;&#x78;&#x78;&#46;&#x63;&#111;&#x6d;</a><br>Date:   Sat Feb 18 00:40:31 2017 +0800</p>
+</code></pre><p>commit 96624c91f55dbf99a17eacfa71bc367ad7a2de71<br>Author: 眼镜 <a href="&#109;&#x61;&#x69;&#108;&#116;&#x6f;&#x3a;&#120;&#x78;&#x40;&#x78;&#x78;&#x2e;&#x63;&#x6f;&#x6d;">&#120;&#x78;&#x40;&#x78;&#x78;&#x2e;&#x63;&#x6f;&#x6d;</a><br>Date:   Sat Feb 18 00:40:31 2017 +0800</p>
 <pre><code>增下sshd的配置文件
-</code></pre><p>commit aa43437ac41c47082dffb1a970ba756e380b01a9<br>Author: 眼镜 <a href="&#109;&#97;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#120;&#120;&#x40;&#x78;&#x78;&#46;&#x63;&#x6f;&#109;">&#120;&#120;&#x40;&#x78;&#x78;&#46;&#x63;&#x6f;&#109;</a><br>Date:   Fri Feb 17 17:28:58 2017 +0800</p>
+</code></pre><p>commit aa43437ac41c47082dffb1a970ba756e380b01a9<br>Author: 眼镜 <a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#x6f;&#x3a;&#x78;&#x78;&#x40;&#x78;&#x78;&#x2e;&#x63;&#x6f;&#109;">&#x78;&#x78;&#x40;&#x78;&#x78;&#x2e;&#x63;&#x6f;&#109;</a><br>Date:   Fri Feb 17 17:28:58 2017 +0800</p>
 <pre><code>测试环境重启guor_app和guor_server服务启动后直接查看日志
 </code></pre><p>可以看到commit 后面的字符串,就是每次提交的id,这个id是回滚的关建<br>方法:<br>[root@ok IT-DOC]# git reset –hard 66d031548a1d0f6af9e4e1f7b29827d3edea52d4<br>HEAD is now at 66d0315 更新wifi密码<br>代码回退成功!</p>
 
@@ -1197,7 +1310,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
