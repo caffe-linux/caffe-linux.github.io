@@ -90,12 +90,16 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="yw">
-<meta property="og:url" content="http://espressos.cn/tags/kernel/index.html">
+<meta name="description" content="错误如下: /etc/init.d/zabbix-server restartshell-init: error retrieving current directory: getcwd: cannot access parent directories: No such file or directoryShutting down Zabbix server:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zabbix启动报错">
+<meta property="og:url" content="http://espressos.cn/2017/05/18/zabbix启动报错/index.html">
 <meta property="og:site_name" content="yw">
+<meta property="og:description" content="错误如下: /etc/init.d/zabbix-server restartshell-init: error retrieving current directory: getcwd: cannot access parent directories: No such file or directoryShutting down Zabbix server:">
+<meta property="og:updated_time" content="2017-05-19T08:34:13.192Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yw">
+<meta name="twitter:title" content="zabbix启动报错">
+<meta name="twitter:description" content="错误如下: /etc/init.d/zabbix-server restartshell-init: error retrieving current directory: getcwd: cannot access parent directories: No such file or directoryShutting down Zabbix server:">
 
 
 
@@ -123,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://espressos.cn/tags/kernel/"/>
+  <link rel="canonical" href="http://espressos.cn/2017/05/18/zabbix启动报错/"/>
 
 
 
 
 
-  <title>Tag: kernel | yw</title>
+  <title>zabbix启动报错 | yw</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zk-CN">
@@ -155,7 +159,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -239,44 +243,144 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h1>kernel<small>Tag</small>
-      </h1>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://espressos.cn/2017/05/18/zabbix启动报错/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bass">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yw">
+    </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">zabbix启动报错</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-19T04:29:01+08:00">
+                2017-05-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>错误如下:</p>
+<h1 id="etc-init-d-zabbix-server-restart"><a href="#etc-init-d-zabbix-server-restart" class="headerlink" title="/etc/init.d/zabbix-server restart"></a>/etc/init.d/zabbix-server restart</h1><p>shell-init: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory<br>Shutting down Zabbix server:                               [  OK  ]<br>Starting Zabbix server: shell-init: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory<br>问题是这样的,我时入了一个目录如一个进程的pid目录,然后这个进程没了,也就是说/etc/prox/xxxx 目录就没了了,所以我在这个不存在的目录 执行启动某个服务时就会报上面的错.</p>
+<p>原因:<br>一般来说是因为你 cd 到了某个目录之后 rm 了这个目录，这时去执行某些 service 脚本的时候就会报 getcwd 错误。只需要 cd 到任何一个实际存在的目录下在执行命令即可。</p>
 
-      <h2 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2017/05/16/内核软死锁（soft-lockup）bug原因分析/" itemprop="url">
-              
-                <span itemprop="name">内核软死锁（soft lockup）bug原因分析</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-17T02:14:29+08:00"
-              content="2017-05-17" >
-          05-17
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/18/zabbix-web端登录的初始密码和如何修改初始密码/" rel="next" title="zabbix web端登录的初始密码和如何修改初始密码">
+                <i class="fa fa-chevron-left"></i> zabbix web端登录的初始密码和如何修改初始密码
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -284,6 +388,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -303,8 +411,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -357,6 +474,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-init-d-zabbix-server-restart"><span class="nav-number">1.</span> <span class="nav-text">/etc/init.d/zabbix-server restart</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -470,6 +603,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
 
   
 
